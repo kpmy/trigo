@@ -3,6 +3,10 @@ Trinary logic
 */
 package tri //import "github.com/kpmy/trigo"
 
+import (
+	"strings"
+)
+
 /* троичная логика */
 var TRUE Trit = Trit{N: false, T: true}
 var FALSE Trit = Trit{N: false, T: false}
@@ -109,6 +113,18 @@ func This(_x interface{}) Trit {
 		}
 	case nil:
 		return NIL
+	case string:
+		if strings.EqualFold("true", x) {
+			return TRUE
+		} else if strings.EqualFold("false", x) {
+			return FALSE
+		} else if strings.EqualFold("nil", x) {
+			return NIL
+		} else if strings.EqualFold("null", x) {
+			return NIL
+		} else {
+			panic(x)
+		}
 	}
 	panic(0)
 }
